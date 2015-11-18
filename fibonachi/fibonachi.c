@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "rdtsc/rdtsc_timer.h"
 
-int recursive_fibo(int n);
-int function_fibo(int n);
+uint64_t recursive_fibo(int n);
+uint64_t function_fibo(int n);
 
 
 int main()
@@ -12,36 +12,36 @@ int main()
     scanf("%d", &num);
 
     tstart();
-    printf("FUNCTION fibo value = %d\n",function_fibo(num));
+    printf("FUNCTION fibo value = %" PRIu64 "\n",function_fibo(num));
     tfinish();
 
     printf("\n");
  
     tstart();
-    printf("RECURSIVE fibo value  = %d\n",recursive_fibo(num));
+    printf("RECURSIVE fibo value  = %" PRIu64 "\n",recursive_fibo(num));
     tfinish();
   
 return 0;
 }
 
-
-int recursive_fibo(int n)
+// for programmer ( tail recursion )
+uint64_t recursive_fibo(int n)
 {
-    if ( n == 0 ) return 0;
-    if ( n == 1 ) return 1; 
+    if ( n <= 1 ) return n;
 
     return recursive_fibo(n-1) + recursive_fibo(n-2);
 }
 
-int function_fibo(int n)
+// for performance
+uint64_t function_fibo(int n)
 {
-    if ( n == 0 )  return 0;
-    if ( n == 1 )  return 1;
+    if ( n <= 1 )  return n;
+    int i;
     int sum  = 0;
     int sum1 = 0;
     int sum2 = 1;
     
-    for(int i = 2 ; i <= n ; i++)
+    for( i = 2 ; i <= n ; i++)
     {
         sum  = sum1 + sum2; 
         sum1 = sum2;
