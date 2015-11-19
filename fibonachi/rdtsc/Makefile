@@ -10,13 +10,13 @@ OBJS = $(SRC:.c=.o)
 
 
 
-all: my_rdtsc
+all: $(RDTSC_LIB)
 
-my_rdtsc: $(OBJS)
-	$(CC) $(LDFLAGS) $(OBJS) -o $(RDTSC_LIB)
+$(RDTSC_LIB): $(OBJS)
+	$(CC) $(LDFLAGS) $? -o $@
 
 $(OBJS): $(SRC)
-	$(CC) $(CFLAGS) $(SRC)
+	$(CC) $(CFLAGS) $?
 
 clean:
 	rm -f *.*o

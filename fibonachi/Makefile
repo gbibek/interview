@@ -8,9 +8,8 @@ MY_LIB_PATH := $(addprefix $(CURRENT_DIR)/, $(RDTSC))
 LIB = -lrdtsc
 SRC = $(shell echo *.c)
 OBJS = $(SRC:.c=.o)
-OBJS += librdtsc.so
+#OBJS += librdtsc.so
 BIN = my_fib
-$(info $())
 
 
 TARGET = $(BIN)
@@ -18,9 +17,11 @@ TARGET = $(BIN)
 all: $(TARGET)
 
 $(TARGET): $(OBJS)   
-	$(CC) $(FLAGS) $(LIB_PATH) $(SRC) -o $(TARGET) $(LIB) 
+	$(info $(OBJ))
+	$(CC) $(FLAGS) $(LIB_PATH) $< -o $@ $(LIB) 
 
-librdtsc.so:
+$(OBJS): $(SRC)
+	$(CC) -c $? 
 	cd $(RDTSC) && $(MAKE)
 
 clean:
