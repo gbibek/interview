@@ -15,7 +15,7 @@ void tstart(){
 }
 
 void tfinish(){
-    unsigned long long sim_time;
+    uint64_t sim_time;
     setlocale(LC_NUMERIC, "");
 #ifdef __MACH__ // OS X does not have clock_gettime, use clock_get_time
     clock_serv_t cclock;
@@ -31,4 +31,5 @@ void tfinish(){
     sim_time = ((1e+9 * (ts_end.tv_sec - ts_start.tv_sec)) + 
                     ((ts_end.tv_nsec - ts_start.tv_nsec)));
     fprintf(stderr, "elapsed %'" PRIu64 " nseconds\n", sim_time);   
+    printf("and from rdtsc.c MY_VAL = %d\n",MY_VAL);
 }

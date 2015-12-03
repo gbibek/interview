@@ -1,5 +1,5 @@
 
-
+MYVAL := 36
 CC = gcc 
 FLAGS = -Wall
 CFLAGS = -c $(FLAGS) -Werror -fPIC
@@ -16,7 +16,7 @@ $(RDTSC_LIB): $(OBJS)
 	$(CC) $(LDFLAGS) $? -o $@
 
 $(OBJS): $(SRC)
-	$(CC) $(CFLAGS) $?
+	$(CC) -DMY_VAL=$(MYVAL) $(CFLAGS) $?
 
 clean:
 	rm -f *.*o

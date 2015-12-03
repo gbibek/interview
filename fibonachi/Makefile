@@ -1,11 +1,12 @@
 
+MYVAL := 36
 CC = gcc
-FLAGS = -Wall
+FLAGS = -Wall 
 RDTSC = rdtsc
 CURRENT_DIR = $(shell pwd)
 LIB_PATH=-L$(addprefix $(CURRENT_DIR)/, $(RDTSC))
 MY_LIB_PATH := $(addprefix $(CURRENT_DIR)/, $(RDTSC)) 
-LIB = -lrdtsc
+LIB = -lrdtsc -lrt
 SRC = $(shell echo *.c)
 OBJS = $(SRC:.c=.o)
 #OBJS += librdtsc.so
@@ -18,10 +19,10 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)   
 	$(info $(OBJ))
-	$(CC) $(FLAGS) $(LIB_PATH) $< -o $@ $(LIB) 
+	$(CC) $(FLAGS) $(LIB_PATH) $< -o $@ $(LIB)  
 
 $(OBJS): $(SRC)
-	$(CC) -c $? 
+	$(CC) -DMY_VAL=$(MYVAL) -c $? 
 	cd $(RDTSC) && $(MAKE)
 
 clean:

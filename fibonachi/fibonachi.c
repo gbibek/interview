@@ -3,7 +3,7 @@
 
 uint64_t recursive_fibo(int n);
 uint64_t function_fibo(int n);
-
+//#define MY_VAL 2
 
 int main()
 {
@@ -20,6 +20,11 @@ int main()
     tstart();
     printf("RECURSIVE fibo value  = %" PRIu64 "\n",recursive_fibo(num));
     tfinish();
+    printf("MY_VAL = %d\n",MY_VAL);
+#ifdef MY_VAL
+    printf("I got my val too\n");
+#endif
+
   
 return 0;
 }
@@ -38,11 +43,12 @@ uint64_t function_fibo(int n)
 {
     if ( n == 0 )  return 0;
     if ( n == 1 )  return 1;
+    int i;
     int sum  = 0;
     int sum1 = 0;
     int sum2 = 1;
     
-    for(int i = 2 ; i <= n ; i++)
+    for(i = 2 ; i <= n ; i++)
     {
         sum  = sum1 + sum2; 
         sum1 = sum2;
